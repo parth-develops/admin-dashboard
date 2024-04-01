@@ -1,3 +1,5 @@
+import Image from "next/image";
+import MenuLink from "./menuLink/menuLink";
 import styles from "./sidebar.module.scss";
 
 import {
@@ -79,17 +81,31 @@ const menuItems = [
 export default function Sidebar() {
   return (
     <div className={styles.container}>
-      <ul>
-
+      <div className={styles.user}>
+        <Image className={styles.userImagek} src="/noavatar.png" alt="" width={50} height={50} />
+        <div className={styles.userDetail}>
+          <span className={styles.username}>John Doe</span>
+          <span className={styles.userTitle}>Admin</span>
+        </div>
+      </div>
+      <ul className={styles.list}>
         {
           menuItems.map((category => (
             <li key={category.title}>
-              <span className={styles.category}>{category.title}</span>
-              {}
+              <span>{category.title}</span>
+              {
+                category.list.map(item => (
+                  <MenuLink item={item} key={item.title} />
+                ))
+              }
             </li>
           )))
         }
       </ul>
+      <button className={styles.logout}>
+        <MdLogout />
+        Logout
+      </button>
     </div>
   )
 }

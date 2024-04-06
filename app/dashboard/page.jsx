@@ -1,6 +1,5 @@
 import styles from '../ui/dashboard/dashboard.module.scss';
 import Card from '../ui/dashboard/card/card'
-import Rightbar from '../ui/dashboard/rightbar/rightbar';
 import Transactions from '../ui/dashboard/transactions/transactions';
 import Chart from '../ui/dashboard/chart/chart';
 
@@ -16,7 +15,6 @@ export default function Dashboard() {
         <Transactions />
         <Chart />
       </div>
-      <aside><Rightbar /></aside>
     </main>
   )
 }

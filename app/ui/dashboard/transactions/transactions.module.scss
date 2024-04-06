@@ -38,12 +38,16 @@
             }
 
             .pending {
+                background-color: #f7cb7375;
+            }
+
+            .done {
                 background-color: #afd6ee75;
             }
-            .done {
+
+            .cancelled {
                 background-color: #f7737375;
             }
         }
     }
 }
-

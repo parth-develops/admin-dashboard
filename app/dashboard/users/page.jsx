@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.scss";
+import Pagination from "@/app/ui/dashboard/pagination/pagination";
 
 export default function Users() {
   return (
@@ -30,6 +31,7 @@ export default function Users() {
             <td>
               <div className={styles.user}>
                 <Image src="/noavatar.png" alt="noavatar" width={40} height={40} />
+                John Doe
               </div>
             </td>
             <td>john@gmail.com</td>
@@ -37,14 +39,17 @@ export default function Users() {
             <td>Admin</td>
             <td>active</td>
             <td>
-              <Link href="/">
-                <button className={`${styles.button} ${styles.view}`}>View</button>
-              </Link>
-                <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+              <div className={styles.buttons}>
+                <Link href="/">
+                  <button className={`${styles.view}`}>View</button>
+                </Link>
+                <button className={`${styles.delete}`}>Delete</button>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <Pagination />
     </div>
   )
 }

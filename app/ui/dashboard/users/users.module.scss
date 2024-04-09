@@ -4,6 +4,12 @@
     border-radius: 10px;
     margin-top: 20px;
 
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     button {
         padding: 10px;
         background-color: #5d57c9;
@@ -12,10 +18,44 @@
         border-radius: 5px;
         cursor: pointer;
     }
-}
 
-.top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    table {
+        width: 100%;
+
+        td {
+            padding: 10px;
+
+            .user {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                img {
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                gap: 10px;
+
+                button {
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    color: var(--text);
+                    border: none;
+                    cursor: pointer;
+                }
+
+                button.view {
+                    background-color: #008080;
+                }
+
+                button.delete {
+                    background-color: #dc143c;
+                }
+            }
+        }
+    }
 }

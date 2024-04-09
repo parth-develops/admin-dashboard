@@ -1,0 +1,38 @@
+.addProduct {
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        input, textarea, select {
+            padding: 24px;
+            background-color: transparent;
+            color: var(--text);
+            border-radius: 5px;
+            border: solid 2px #2e374a;
+            margin-bottom: 30px;
+        }
+
+        input, select {
+            width: 45%;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        button[type=submit] {
+            width: 100%;
+            padding: 24px;
+            background-color: #008080;
+            color: var(--text);
+            border: none;
+            border-radius: 5px;
+        }
+    }
+}

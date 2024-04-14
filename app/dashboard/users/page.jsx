@@ -8,7 +8,6 @@ import { fetchUsers } from "@/app/lib/data";
 export default async function Users() {
 
   const users = await fetchUsers();
-  console.log( users);
 
   return (
     <div className={styles.users}>
@@ -32,26 +31,30 @@ export default async function Users() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.user}>
-                <Image src="/noavatar.png" alt="noavatar" width={40} height={40} />
-                John Doe
-              </div>
-            </td>
-            <td>john@gmail.com</td>
-            <td>06.04.2024</td>
-            <td>Admin</td>
-            <td>active</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href="/dashboard/users/test">
-                  <button className={`${styles.view}`}>View</button>
-                </Link>
-                <button className={`${styles.delete}`}>Delete</button>
-              </div>
-            </td>
-          </tr>
+          {
+            users.map((user) =>
+              <tr key={user._id}>
+                {console.log(user.img)}
+                <td>
+                  <div className={styles.user}>
+                    <Image src={user.img} alt="user image" width={40} height={40} />
+                    {user.username}
+                  </div>
+                </td>
+                <td>{user.email}</td>
+                <td>{user.createdAt?.toString().slice(4,16)}</td>
+                <td>{user.isAdmin ? "Admin" : "Client"}</td>
+                <td>{user.isActive ? "active" : "inactive"}</td>
+                <td>
+                  <div className={styles.buttons}>
+                    <Link href={`users/${user._id}`}>
+                      <button className={`${styles.view}`}>View</button>
+                    </Link>
+                    <button className={`${styles.delete}`}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            )}
         </tbody>
       </table>
       <Pagination />

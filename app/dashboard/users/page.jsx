@@ -5,9 +5,11 @@ import styles from "@/app/ui/dashboard/users/users.module.scss";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchUsers } from "@/app/lib/data";
 
-export default async function Users() {
+export default async function Users({ searchParams }) {
 
-  const users = await fetchUsers();
+  const q = searchParams.q || "";
+  const page = searchParams.page || 1;
+  const users = await fetchUsers(q, page);
 
   return (
     <div className={styles.users}>
@@ -34,7 +36,6 @@ export default async function Users() {
           {
             users.map((user) =>
               <tr key={user._id}>
-                {console.log(user.img)}
                 <td>
                   <div className={styles.user}>
                     <Image src={user.img} alt="user image" width={40} height={40} />
@@ -42,7 +43,7 @@ export default async function Users() {
                   </div>
                 </td>
                 <td>{user.email}</td>
-                <td>{user.createdAt?.toString().slice(4,16)}</td>
+                <td>{user.createdAt?.toString().slice(4, 16)}</td>
                 <td>{user.isAdmin ? "Admin" : "Client"}</td>
                 <td>{user.isActive ? "active" : "inactive"}</td>
                 <td>

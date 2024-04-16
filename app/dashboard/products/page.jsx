@@ -56,7 +56,7 @@ export default async function Products({ searchParams }) {
           }
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={productCount} />
     </div>
   )
 }

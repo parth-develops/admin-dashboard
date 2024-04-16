@@ -12,14 +12,21 @@ export default function Pagination({ count }) {
 
   const ITEMS_PER_PAGE = 2;
   const params = new URLSearchParams(searchParams);
-
+  
   const hasPrevPage = ITEMS_PER_PAGE * (parseInt(page) - 1) > 0;
   const hasNextPage = ITEMS_PER_PAGE * (parseInt(page) - 1) + ITEMS_PER_PAGE < count;
-
+  
+  console.log(hasPrevPage);
+  console.log(hasNextPage);
+  const handlePageChange = (type) => {
+    type === "previous" ? params.set("page", parseInt(page) - 1) : params.set("page", parseInt(page) + 1);
+    replace(`${pathname}?${params}`);
+  }
+  
   return (
     <div className={styles.pagination}>
-      <button disabled={!hasPrevPage}>Previous</button>
-      <button disabled={!hasNextPage}>Next</button>
+      <button disabled={!hasPrevPage} onClick={() => handlePageChange("previous")}>Previous</button>
+      <button disabled={!hasNextPage} onClick={() => handlePageChange("next")}>Next</button>
     </div>
   )
 }

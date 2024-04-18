@@ -1,13 +1,14 @@
 import styles from "@/app/ui/dashboard/users/addUser.module.scss";
+import { addUser as addUserAction } from "@/app/lib/actions";
 
 export default function addUser() {
   return (
     <div className={styles.addUser}>
-      <form action="">
+      <form action={addUserAction}>
         <input type="text" placeholder="username" name="username" required />
         <input type="email" placeholder="email" name="email" required />
         <input type="password" placeholder="password" name="password" required />
-        <input type="tel" name="phone" id="phone" />
+        <input type="tel" name="phone" id="phone" placeholder="Phone" />
         <select name="isAdmin" id="isAdmin">
           <option value={false}>Is Admin</option>
           <option value={true}>Yes</option>

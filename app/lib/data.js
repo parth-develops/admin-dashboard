@@ -16,6 +16,16 @@ export const fetchUsers = async (q, page) => {
     }
 }
 
+export const fetchUser = async (id) => {
+    try {
+        connectToDB();
+        const user = await Users.findById(id);
+        return user;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
 export const fetchProducts = async (q, page) => {
     const regex = new RegExp(q, "i");
 
@@ -26,6 +36,16 @@ export const fetchProducts = async (q, page) => {
         const productCount = await Products.find({ title: { $regex: regex } }).count();
         const products = await Products.find({ title: { $regex: regex } }).limit(ITEMS_PER_PAGE).skip(ITEMS_PER_PAGE * (page - 1));
         return {productCount, products};
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchProduct = async (id) => {
+    try {
+        connectToDB();
+        const product = await Products.findById(id);
+        return product;
     } catch (error) {
         throw new Error(error);
     }

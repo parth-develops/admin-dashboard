@@ -4,6 +4,7 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.scss";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchUsers } from "@/app/lib/data";
+import { deleteUser } from "@/app/lib/actions";
 
 export default async function Users({ searchParams }) {
 
@@ -38,7 +39,7 @@ export default async function Users({ searchParams }) {
               <tr key={user._id}>
                 <td>
                   <div className={styles.user}>
-                    <Image src={user.img} alt="user image" width={40} height={40} />
+                    <Image src={user.img || "/noavatar.png"} alt="user image" width={40} height={40} />
                     {user.username}
                   </div>
                 </td>
@@ -51,7 +52,10 @@ export default async function Users({ searchParams }) {
                     <Link href={`users/${user._id}`}>
                       <button className={`${styles.view}`}>View</button>
                     </Link>
-                    <button className={`${styles.delete}`}>Delete</button>
+                    <form action={deleteUser}>
+                      <input type="hidden" name="id" value={user._id} />
+                      <button className={`${styles.delete}`}>Delete</button>
+                    </form>
                   </div>
                 </td>
               </tr>

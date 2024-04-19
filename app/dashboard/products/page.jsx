@@ -4,6 +4,7 @@ import Pagination from '@/app/ui/dashboard/pagination/pagination'
 import styles from "@/app/ui/dashboard/products/products.module.scss";
 import Search from "@/app/ui/dashboard/search/search";
 import { fetchProducts } from "@/app/lib/data";
+import { deleteProduct } from "@/app/lib/actions";
 
 export default async function Products({ searchParams }) {
   const q = searchParams.q || "";
@@ -49,7 +50,10 @@ export default async function Products({ searchParams }) {
                   <Link href={`/dashboard/products/${product._id}`}>
                     <button className={`${styles.view}`}>View</button>
                   </Link>
-                  <button className={`${styles.delete}`}>Delete</button>
+                  <form action={deleteProduct}>
+                    <input type="hidden" name="id" value={product._id} />
+                    <button className={`${styles.delete}`}>Delete</button>
+                  </form>
                 </div>
               </td>
             </tr>)

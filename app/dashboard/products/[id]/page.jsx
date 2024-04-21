@@ -1,7 +1,12 @@
 import Image from "next/image";
 import styles from "@/app/ui/dashboard/products/individual.module.scss";
+import { updateProduct } from "@/app/lib/actions";
+import { fetchProduct } from "@/app/lib/data";
 
-export default function IndividualProduct() {
+export default async function IndividualProduct({ params }) {
+  const { id } = params;
+  const product = await fetchProduct(id);
+
   return (
     <div className={styles.individualProduct}>
       <div className={styles.info}>
@@ -11,19 +16,20 @@ export default function IndividualProduct() {
         Clock
       </div>
       <div className={styles.formContainer}>
-        <form action="">
+        <form action={updateProduct}>
+          <input type="hidden" name="id" value={product.id} />
           <label htmlFor="title">Title</label>
-          <input type="text" name="title" id="title" placeholder="Clock" />
+          <input type="text" name="title" id="title" placeholder={product.title} />
           <label htmlFor="price">Price</label>
-          <input type="number" name="price" id="price" placeholder="$49" />
+          <input type="number" name="price" id="price" placeholder={product.price} />
           <label htmlFor="stock">Stock</label>
-          <input type="number" name="stock" id="stock" />
+          <input type="number" name="stock" id="stock" placeholder={product.stock} />
           <label htmlFor="color">Color</label>
-          <input type="text" name="color" id="color" placeholder="Red" />
+          <input type="text" name="color" id="color" placeholder={product.color} />
           <label htmlFor="size">Size</label>
-          <input type="text" name="size" id="size" placeholder="Medium" />
-          <label htmlFor="desc">Description</label>
-          <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Description here..."></textarea>
+          <input type="text" name="size" id="size" placeholder={product.size} />
+          <label htmlFor="description">Description</label>
+          <textarea name="description" id="description" cols="30" rows="10" placeholder={product.description}></textarea>
           <label htmlFor="category">Category</label>
           <select name="category" id="category">
             <option value="choose">Choose a category</option>

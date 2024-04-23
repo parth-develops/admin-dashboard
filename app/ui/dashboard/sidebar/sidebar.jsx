@@ -14,6 +14,7 @@ import {
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
+import { auth } from "@/app/auth";
 
 const menuItems = [
   {
@@ -78,7 +79,10 @@ const menuItems = [
   },
 ];
 
-export default function Sidebar() {
+export default async function Sidebar() {
+  const session = await auth();
+  console.log(session);
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>

@@ -8,12 +8,12 @@ import bcrypt from "bcrypt";
 const login = async (credentials) => {
     try {
         connectToDB();
-        const user = await Users.findOne({username:credentials.username});
+        const user = await Users.findOne({ username: credentials.username });
 
         if (!user) throw new Error("Wrong crednetials");
 
         const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
-        
+
         if (!isPasswordCorrect) throw new Error("Wrong crednetials");
 
         return user;
@@ -30,7 +30,7 @@ export const { signIn, signOut, auth } = NextAuth({
             async authorize(credentials) {
                 try {
                     const user = await login(credentials);
-                    
+
                     return user;
                 } catch (error) {
                     return null
@@ -38,4 +38,22 @@ export const { signIn, signOut, auth } = NextAuth({
             }
         })
     ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.username = user.username;
+                token.img = user.img;
+            }
+
+            return token;
+        },
+        async session({ session, token }) {
+            if (token) {
+                session.user.username = token.username;
+                session.user.img = token.img;
+            }
+
+            return session;
+        }
+    }
 })

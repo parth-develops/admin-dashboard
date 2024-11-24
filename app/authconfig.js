@@ -3,6 +3,7 @@ export const authConfig = {
     pages: {
         signIn: "/login"
     }, 
+    secret: process.env.AUTH_SECRET,
     callbacks: {
         authorized({auth, request}) {
             const isLoggedIn = auth?.user;

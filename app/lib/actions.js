@@ -35,8 +35,10 @@ export const updateUser = async (formData) => {
     try {
         connectToDB();
 
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
         const updateFields = {
-            username, email, password, phone, address, isAdmin, isActive
+            username, email, password: hashedPassword, phone, address, isAdmin, isActive
         }
 
         Object.keys(updateFields).forEach(key => (updateFields[key] === "" || undefined) && delete updateFields[key])
@@ -132,6 +134,7 @@ export const authenticate = async (prevState, formData) => {
         if (error.message.includes("CredentialsSignin")) {
             return "Wrong Credentials";
         }
+        console.error(error);
         throw error;
     }
 }

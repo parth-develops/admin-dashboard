@@ -17,7 +17,7 @@ export default async function IndividualProduct({ params }) {
       </div>
       <div className={styles.formContainer}>
         <form action={updateProduct}>
-          <input type="hidden" name="id" value={product.id} />
+          <input type="hidden" name="id" value={product._id} />
           <label htmlFor="title">Title</label>
           <input type="text" name="title" id="title" placeholder={product.title} />
           <label htmlFor="price">Price</label>
